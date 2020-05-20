@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{modal_title}}</h1>
+<div mat-dialog-content>
+	<mat-form-field>
+		<mat-label>Name</mat-label>
+		<input matInput [(ngModel)]="name" type="text">
+  </mat-form-field>
+		<br>
+		<mat-form-field>
+			<mat-label>Price</mat-label>
+			<input matInput [(ngModel)]="price" type="number">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button class="btn-secondary2" mat-button (click)="onNoClick()">Cancel</button>
+	<!-- <button mat-button [mat-dialog-close]="data.animal" color="primary" cdkFocusInitial>Save</button> -->
+
+	<button mat-flat-button color="primary" (click)="save()">Save</button>
+
+</div>
