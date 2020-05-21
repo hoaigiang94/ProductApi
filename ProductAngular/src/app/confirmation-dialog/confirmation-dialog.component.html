@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{ this.data.title }}</h1>
+<div mat-dialog-content>
+  {{ this.data.confirmation_text }}
+</div>
+
+<div mat-dialog-actions class="mt-3">
+  <button class="btn-secondary mr-3" mat-button (click)="onNoClick()">
+    No
+  </button>
+  <button mat-flat-button color="primary" (click)="this.data.onConfirm()">
+    Yes
+  </button>
+</div>

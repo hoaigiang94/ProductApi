@@ -13,7 +13,7 @@ import { FormControl } from "@angular/forms";
 export class ProductDialogComponent implements OnInit {
   product: Product;
   name = new FormControl("");
-  price = new FormControl(0.0);
+  price = new FormControl(null);
   mode: string;
   modal_title: string;
 
