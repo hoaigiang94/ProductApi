@@ -66,14 +66,16 @@ export class ProductService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Product[]>(`${this.productsUrl}/?id=${term}`).pipe(
-      tap((x) =>
-        x.length
-          ? console.log(`found products matching "${term}"`)
-          : console.log(`no products matching "${term}"`)
-      ),
-      catchError(this.handleError<Product[]>("searchProducts", []))
-    );
+    return this.http
+      .get<Product[]>(`${this.productsUrl}/?searchString=${term}`)
+      .pipe(
+        tap((x) =>
+          x.length
+            ? console.log(`found products matching "${term}"`)
+            : console.log(`no products matching "${term}"`)
+        ),
+        catchError(this.handleError<Product[]>("searchProducts", []))
+      );
   }
 
   /**

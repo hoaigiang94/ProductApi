@@ -24,9 +24,16 @@ namespace ProductApi.Controllers
         // GET: api/Products
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string searchString)
         {
-            return await _context.Products.ToListAsync();
+            var products = from p in _context.Products
+                           select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => (p.Id + ' ' + p.Name + ' ' + p.Price).Contains(searchString));
+            }
+            return await products.ToListAsync();
         }
 
         // GET: api/Products/5

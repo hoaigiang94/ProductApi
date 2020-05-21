@@ -45,8 +45,13 @@ export class ProductListComponent {
 
   // Push a search term into the observable stream.
   search(term: string): void {
-    console.log("term", term)
-    this.searchTerms.next(term);
+    if (!term) {
+      this.getProducts();
+    } else {
+      this.productService
+        .searchProducts(term)
+        .subscribe((products) => (this.products = products));
+    }
   }
 
   openAddProduct(): void {
