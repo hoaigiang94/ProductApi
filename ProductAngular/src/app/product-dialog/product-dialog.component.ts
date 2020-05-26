@@ -36,12 +36,15 @@ export class ProductDialogComponent implements OnInit {
       this.price.setValue(this.product.price);
     }
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   save(): void {
     this.product && this.product.id ? this.updateProduct() : this.addProduct();
   }
+
   addProduct(): void {
     const name = this.name.value;
     const price = this.price.value;
@@ -49,6 +52,7 @@ export class ProductDialogComponent implements OnInit {
       .addProduct({ name, price } as Product)
       .subscribe(() => this.afterSave());
   }
+
   updateProduct(): void {
     const name = this.name.value;
     const price = this.price.value;
@@ -57,6 +61,7 @@ export class ProductDialogComponent implements OnInit {
       .updateProduct(this.product)
       .subscribe(() => this.afterSave());
   }
+
   afterSave(): void {
     this.dialogRef.close();
     this.data.afterSave();

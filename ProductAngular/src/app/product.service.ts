@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { Product } from "./product";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<any>(this.productsUrl, this.httpOptions).pipe(
+    return this.http.get<Product[]>(this.productsUrl, this.httpOptions).pipe(
       tap((_) => console.log("fetched products")),
       catchError(this.handleError<Product[]>("getProducts", []))
     );
@@ -23,7 +23,7 @@ export class ProductService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new product to the server */
   addProduct(product: Product): Observable<Product> {
     return this.http
       .post<Product>(this.productsUrl, product, this.httpOptions)
@@ -31,7 +31,7 @@ export class ProductService {
         tap((newProduct: Product) =>
           console.log(`added product w/ id=${newProduct.id}`)
         ),
-        catchError(this.handleError<Product>("addHero"))
+        catchError(this.handleError<Product>("addProduct"))
       );
   }
 
@@ -42,7 +42,7 @@ export class ProductService {
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
       tap((_) => console.log(`deleted product id=${id}`)),
-      catchError(this.handleError<Product>("deleteHero"))
+      catchError(this.handleError<Product>("deleteProduct"))
     );
   }
 
@@ -60,10 +60,10 @@ export class ProductService {
       );
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET products whose name contains search term */
   searchProducts(term: string): Observable<Product[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty product array.
       return of([]);
     }
     return this.http

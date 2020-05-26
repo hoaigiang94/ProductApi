@@ -1,23 +1,15 @@
+<!-- <h1>Product List Component</h1> -->
 <div class="px-3 d-flex" style="height: 36px;">
   <button class="btn-sm" (click)="openAddProduct()">Add product</button>
   <div class="search-bar-wrapper ml-auto d-flex align-item-center">
     <div class="mr-3 my-auto">Search</div>
     <input
-      #searchBox
       id="search-box"
-	  class="h-100"
-	  (keydown.enter)="search($event.target.value)"
+      class="h-100"
+      (keydown.enter)="search($event.target.value)"
     />
   </div>
 </div>
-<div>{{ products$.length }}</div>
-<ul class="search-result">
-  <li *ngFor="let product$ of products$ | async">
-    <a routerLink="/detail/{{ product$.id }}">
-      {{ product$.name }}
-    </a>
-  </li>
-</ul>
 <div class="p-3">
   <table class="table">
     <colgroup>
@@ -32,7 +24,7 @@
       <th>Price</th>
       <th>Actions</th>
     </thead>
-    <tbody *ngFor="let product of products$.length ? products$ : products">
+    <tbody *ngFor="let product of products">
       <tr>
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
@@ -51,9 +43,3 @@
     </tbody>
   </table>
 </div>
-
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->
